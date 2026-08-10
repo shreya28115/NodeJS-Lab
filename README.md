@@ -50,3 +50,41 @@ The Node.js HTTP server was successfully created and tested. Multiple routes wer
 ## Problems Faced
 
 No major problems were faced during this practical.
+
+## Lab Assignment – 03
+
+### Student Directory API
+
+**Student Name:** Shreya Singh  
+**Scholar Number:** 23145022  
+**Course:** BCA  
+**Semester:** VII  
+**Subject:** CS403NOD – Node.js  
+**Lab Number:** 03  
+**Date:** 10 August 2026
+
+### Brief Description
+
+This practical demonstrates how to create a Student Directory API using Node.js and the core HTTP module. Dynamic routes are used to return specific student and item data based on the ID provided in the URL. The practical also demonstrates the use of find() and filter() array methods and handling of not found and invalid ID cases.
+
+### Routes Added
+
+| Route | Description |
+|---|---|
+| /students | Returns the complete list of 12 students |
+| /students/1 | Returns the student with ID 1 |
+| /students/2 | Returns the student with ID 2 |
+| /students/99 | Returns "Student not found" |
+| /students/course/BCA | Returns only students from the BCA course |
+| /students/abc | Returns an error for a non-numeric student ID |
+| /items | Returns the complete list of items |
+| /items/1 | Returns the item with ID 1 |
+| /items/99 | Returns "Item not found" |
+
+### req.url.split()
+
+The req.url.split('/') method divides the URL into parts using the slash character, and split('/')[2] is used to extract the ID from a URL such as /students/1.
+
+## Problems Faced
+
+No major problems were faced during the completion of this lab.
