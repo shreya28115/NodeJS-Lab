@@ -88,3 +88,59 @@ The req.url.split('/') method divides the URL into parts using the slash charact
 ## Problems Faced
 
 No major problems were faced during the completion of this lab.
+
+
+## Lab 04 – Advanced Search, Filter and Sort API
+
+### Routes
+
+GET /students
+Returns all students.
+
+### Query Parameters
+
+course
+Filters students according to their course.
+
+Example:
+http://localhost:3000/students?course=BCA
+
+minMarks
+Returns students whose marks are greater than or equal to the given value.
+
+Example:
+http://localhost:3000/students?minMarks=60
+
+search
+Searches student names using partial and case-insensitive matching.
+
+Example:
+http://localhost:3000/students?search=a
+
+sort
+Sorts the students by name or marks.
+
+Example:
+http://localhost:3000/students?sort=marks&order=desc
+
+order
+Controls sorting direction. It can be asc or desc.
+
+Example:
+http://localhost:3000/students?sort=name&order=asc
+
+### Combined Example
+
+http://localhost:3000/students?course=BCA&minMarks=60&search=a&sort=marks&order=desc
+
+### req.url.split()
+
+req.url.split() divides a URL into parts using the specified separator. It is useful for extracting values such as IDs from URL paths.
+
+### Invalid Input
+
+The server validates minMarks before filtering. If minMarks is not a valid number, it returns HTTP status 400 with a JSON error message. Invalid sort fields and invalid order values are also rejected with status 400.
+
+## Problems Faced
+
+No major problems were faced during Lab 04.
