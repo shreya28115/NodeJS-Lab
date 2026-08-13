@@ -1,0 +1,12 @@
+{
+  "name": "nodejs-lab",
+  "version": "1.0.0",
+  "description": "**Student Name:** Shreya Singh\r **Scholar Number:** [23145022]\r **Course:** BCA\r **Semester:** VII\r **Subject:** Node.js\r **Lab Number:** 01\r **Date:** 31 July 2026",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
