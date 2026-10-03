@@ -1,0 +1,8 @@
+1. How does today's EventEmitter work connect to the Observer Pattern discussed in Theory Class 5?
+
+EventEmitter is related to the Observer Pattern because it allows one object to notify multiple listeners when an event occurs. The object that emits the event does not need to know the internal details of each listener. Listeners register themselves for the events they want to handle. When the event is emitted, the registered listeners are called. This makes programs easier to organize because different parts of the application can respond to the same event independently.
+
+
+2. Name one core Node.js API other than EventEmitter itself that is built on this same pattern, and explain how you know.
+
+The Node.js HTTP Server API uses an event-driven approach. For example, a server can register a listener for the 'request' event using server.on('request', callback). When an HTTP request arrives, Node.js invokes the registered callback. The server does not need to call that callback manually for every incoming request. This demonstrates how events allow a program to respond when something happens.
