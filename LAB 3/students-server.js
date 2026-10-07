@@ -16,7 +16,7 @@ const students = [
     { id: 12, name: "Sayon", course: "BCA", semester: "VII" }
 ];
 
-// My Own Directory: Programming Items
+// Programming Items
 const items = [
     { id: 1, name: "JavaScript", category: "Programming" },
     { id: 2, name: "Node.js", category: "Backend Development" },
@@ -25,20 +25,17 @@ const items = [
     { id: 5, name: "HTML", category: "Web Development" }
 ];
 
-// Create Server
-const server = http.createServer((req, res) => {
+// Request Handler
+function handler(req, res) {
 
     res.setHeader('Content-Type', 'application/json');
 
-    // 1. Return all students
     if (req.url === '/students') {
 
         res.writeHead(200);
         res.end(JSON.stringify(students));
-    }
 
-    // 2. Return only BCA students
-    else if (req.url === '/students/course/BCA') {
+    } else if (req.url === '/students/course/BCA') {
 
         const bcaStudents = students.filter(
             student => student.course === 'BCA'
@@ -46,14 +43,11 @@ const server = http.createServer((req, res) => {
 
         res.writeHead(200);
         res.end(JSON.stringify(bcaStudents));
-    }
 
-    // 3. Return student by ID
-    else if (req.url.startsWith('/students/')) {
+    } else if (req.url.startsWith('/students/')) {
 
         const idText = req.url.split('/')[2];
 
-        // Check if ID is numeric
         if (isNaN(idText)) {
 
             res.writeHead(400);
@@ -82,21 +76,16 @@ const server = http.createServer((req, res) => {
                 error: "Student not found"
             }));
         }
-    }
 
-    // 4. Return all items
-    else if (req.url === '/items') {
+    } else if (req.url === '/items') {
 
         res.writeHead(200);
         res.end(JSON.stringify(items));
-    }
 
-    // 5. Return item by ID
-    else if (req.url.startsWith('/items/')) {
+    } else if (req.url.startsWith('/items/')) {
 
         const idText = req.url.split('/')[2];
 
-        // Check if ID is numeric
         if (isNaN(idText)) {
 
             res.writeHead(400);
@@ -125,19 +114,23 @@ const server = http.createServer((req, res) => {
                 error: "Item not found"
             }));
         }
-    }
 
-    // 6. Unknown route
-    else {
+    } else {
 
         res.writeHead(404);
         res.end(JSON.stringify({
             error: "Route not found"
         }));
     }
-});
+}
 
-// Start Server
-server.listen(3000, () => {
-    console.log("Server running on port 3000");
-});
+module.exports = handler;
+
+// Run independently only when this file is executed directly
+if (require.main === module) {
+    const server = http.createServer(handler);
+
+    server.listen(3000, () => {
+        console.log("Server running on port 3000");
+    });
+}

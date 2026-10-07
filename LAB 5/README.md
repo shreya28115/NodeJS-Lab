@@ -79,8 +79,3 @@ While `setTimeout` is waiting, Node.js does not stop completely. It can continue
 
 This lab helped me understand different ways of handling asynchronous operations in Node.js. I also learned the difference between callbacks, Promises and async/await. I understood how Promise chaining and `Promise.all()` work with asynchronous tasks.
 
-Question:
- Does Promise.all() take the SUM of all three delays, or roughly the LONGEST single delay? Explain why.
-
-Answer:
-Promise.all() takes roughly the longest single delay, not the sum of all three delays. This is because all three orders start at the same time and run concurrently. Promise.all() waits until all the promises are completed, so the total time is approximately equal to the slowest order. In my test, all three orders completed in about 3.255 seconds.

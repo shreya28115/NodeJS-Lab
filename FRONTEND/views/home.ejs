@@ -1,45 +1,104 @@
+```html
 <!DOCTYPE html>
 <html>
+
 <head>
 
     <title>NodeJS Practical Lab</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet"
     >
 
+    <style>
+
+        body {
+            background: #f5eee7;
+            color: #3b2920;
+        }
+
+        .header {
+            background: #4b2e22;
+            color: white;
+            padding: 55px 20px;
+            border-radius: 0 0 30px 30px;
+            margin-bottom: 45px;
+        }
+
+        .lab-card {
+            background: white;
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 5px 18px rgba(75, 46, 34, 0.12);
+            transition: 0.25s;
+        }
+
+        .lab-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(75, 46, 34, 0.18);
+        }
+
+        .lab-number {
+            color: #4b2e22;
+            font-weight: 700;
+        }
+
+        .open-btn {
+            background: #6b4635;
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 10px;
+        }
+
+        .open-btn:hover {
+            background: #4b2e22;
+            color: white;
+        }
+
+    </style>
+
 </head>
 
-<body class="bg-light">
 
-<div class="container py-5">
+<body>
 
-    <div class="text-center mb-5">
+
+<div class="header">
+
+    <div class="container text-center">
 
         <h1 class="fw-bold">
             Node.js Practical Lab
         </h1>
 
-        <p class="text-muted">
+        <p class="mb-0">
             LAB 1 to LAB 7
         </p>
 
     </div>
 
+</div>
+
+
+<div class="container pb-5">
+
     <div class="row g-4">
 
-        <% labs.forEach((lab, index) => { %>
+        <% labs.forEach((lab) => { %>
 
             <div class="col-md-4">
 
-                <div class="card shadow-sm h-100">
+                <div class="lab-card h-100">
 
-                    <div class="card-body text-center">
+                    <div class="card-body text-center p-4">
 
-                        <h3>
-                            LAB <%= index + 1 %>
-                        </h3>
+                        <div class="lab-number fs-5 mb-2">
+                            <%= lab %>
+                        </div>
 
                         <p class="text-muted">
                             Node.js Practical
@@ -47,7 +106,7 @@
 
                         <a
                             href="/lab/<%= encodeURIComponent(lab) %>"
-                            class="btn btn-primary"
+                            class="btn open-btn"
                         >
                             Open Lab
                         </a>
@@ -64,5 +123,8 @@
 
 </div>
 
+
 </body>
+
 </html>
+```

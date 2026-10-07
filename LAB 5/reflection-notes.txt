@@ -1,2 +1,22 @@
-While `setTimeout` is waiting, Node.js does not stop completely. It can continue doing other tasks while the timer is running. After the timer finishes, its callback is handled by the Event Loop. When the call stack is free, the callback runs. So, Node.js can handle other work instead of waiting for the timer to finish.
-`Promise.all()` starts all three orders at the same time. It does not wait for one order to finish before starting the next one. It waits until all three orders are completed. So, the total time is usually close to the longest delay among the three orders. This is faster than running the orders one by one using separate `await` statements.
+Question:
+While your order's setTimeout is “waiting,” is the Node.js process frozen?
+Answer:
+While setTimeout is waiting, the Node.js process is not completely frozen.
+The timer is handled outside the main JavaScript execution flow and Node.js can continue handling other work.
+When the timer finishes, its callback becomes ready to be executed by the Event Loop.
+The Event Loop checks when the call stack is free and then executes the callback.
+This is why Node.js can handle asynchronous operations without blocking the whole program.
+
+Question:
+Why does Promise.all() finish faster?
+Answer:
+Promise.all() starts all the asynchronous operations at approximately the same time.
+They do not wait for one order to finish before starting the next order.
+Therefore, the total time is usually close to the longest individual operation.
+If I used three separate await statements one after another, each operation would start only after the previous one finished.
+So sequential await would take approximately the sum of all three delays.
+
+Question: 
+Does Promise.all() take the SUM of all three delays, or roughly the LONGEST single delay? Explain why.
+Answer:
+Promise.all() takes roughly the longest single delay, not the sum of all three delays. This is because all three orders start at the same time and run concurrently. Promise.all() waits until all the promises are completed, so the total time is approximately equal to the slowest order. In my test, all three orders completed in about 3.255 seconds.

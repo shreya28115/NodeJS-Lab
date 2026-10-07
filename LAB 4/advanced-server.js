@@ -16,7 +16,7 @@ const students = [
     { id: 12, name: "Sayon", course: "BCA", marks: 95 }
 ];
 
-const server = http.createServer((req, res) => {
+function handler(req, res) {
 
     res.setHeader('Content-Type', 'application/json');
 
@@ -24,19 +24,18 @@ const server = http.createServer((req, res) => {
     const pathName = parsedUrl.pathname;
     const query = parsedUrl.query;
 
-    // Only /students route
     if (pathName === '/students') {
 
         let result = [...students];
 
-        // Task 3 - Course filter
         if (query.course) {
             result = result.filter(
-                student => student.course.toLowerCase() === query.course.toLowerCase()
+                student =>
+                    student.course.toLowerCase() ===
+                    query.course.toLowerCase()
             );
         }
 
-        // Task 3 & 7 - Minimum marks filter
         if (query.minMarks) {
 
             const minMarks = Number(query.minMarks);
@@ -54,17 +53,16 @@ const server = http.createServer((req, res) => {
             );
         }
 
-        // Task 4 - Search by name
         if (query.search) {
 
             const searchText = query.search.toLowerCase();
 
             result = result.filter(
-                student => student.name.toLowerCase().includes(searchText)
+                student =>
+                    student.name.toLowerCase().includes(searchText)
             );
         }
 
-        // Task 5 - Sorting
         if (query.sort) {
 
             if (query.sort !== 'name' && query.sort !== 'marks') {
@@ -101,19 +99,25 @@ const server = http.createServer((req, res) => {
             });
         }
 
-        // Return final result
+        res.writeHead(200);
         res.end(JSON.stringify(result, null, 2));
-    }
 
-    // Unknown route
-    else {
+    } else {
+
         res.writeHead(404);
         res.end(JSON.stringify({
             error: "Route not found"
         }));
     }
-});
+}
 
-server.listen(3000, () => {
-    console.log("Server running on port 3000");
-});
+module.exports = handler;
+
+// Run independently only when this file is executed directly
+if (require.main === module) {
+    const server = http.createServer(handler);
+
+    server.listen(3000, () => {
+        console.log("Server running on port 3000");
+    });
+}
